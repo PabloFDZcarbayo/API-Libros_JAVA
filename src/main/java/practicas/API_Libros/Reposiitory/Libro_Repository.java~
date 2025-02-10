@@ -1,0 +1,8 @@
+package practicas.API_Libros.Reposiitory;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import practicas.API_Libros.Model.Libro;
+
+
+public interface Libro_Repository extends JpaRepository<Libro, Long> {
+}
