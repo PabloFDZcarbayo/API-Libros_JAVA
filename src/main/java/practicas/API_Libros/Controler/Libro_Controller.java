@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import practicas.API_Libros.Model.ApiResponse;
 import practicas.API_Libros.Model.Libro;
 import practicas.API_Libros.Service.Libro_Service;
+
 import java.util.List;
 
 @Controller
@@ -29,9 +31,13 @@ public class Libro_Controller {
 
     //@PathVariable indica que el id es una variable que se aplicara en la URL
     @GetMapping("/{id}")
-    public ResponseEntity<Libro> getLibro(@PathVariable("id") Long id) {
-        Libro libro = libro_service.getLibro(id);
-        return ResponseEntity.ok(libro);
+    public ResponseEntity<ApiResponse<Libro>> getLibro(@PathVariable("id") Long id) {
+        try {
+            Libro libro = libro_service.getLibro(id);
+            return ResponseEntity.ok(new ApiResponse<>(true, "Libro encontrado", libro));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new ApiResponse<>(false, "Error: Libro no encontrado", null));
+        }
     }
 
     @GetMapping
@@ -42,14 +48,24 @@ public class Libro_Controller {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteLibro(@PathVariable("id") Long id) {
-        libro_service.deleteLibro(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<ApiResponse> deleteLibro(@PathVariable("id") Long id) {
+        try {
+            libro_service.deleteLibro(id);
+            return ResponseEntity.ok(new ApiResponse(true, "Libro eliminado", null));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new ApiResponse(false, "Error: Libro no encontrado", null));
+        }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Libro> updateLibro(@PathVariable ("id") Long id, @RequestBody Libro libro) {
-        Libro updatedLibro = libro_service.updateLibro(id ,libro);
-        return ResponseEntity.ok(updatedLibro);
+    public ResponseEntity<ApiResponse<Libro>> updateLibro(@PathVariable("id") Long id, @RequestBody Libro libro) {
+        try{
+        Libro updatedLibro = libro_service.updateLibro(id, libro);
+        return ResponseEntity.ok(new ApiResponse<>(true, "Libro actualizado", updatedLibro));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new ApiResponse<>(false, "Error: Libro no encontrado", null));
+        }
     }
 }
+
+
