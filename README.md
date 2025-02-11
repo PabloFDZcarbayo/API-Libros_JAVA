@@ -32,6 +32,7 @@ La base de datos de la aplicación está configurada y hospedada en **Railway**,
 
 Puedes encontrar la documentacion de la Api aqui: 
 <a href="https://documenter.getpostman.com/view/35395657/2sAYXBFedB" target="_blank">
+<br>
   <img src="https://skillicons.dev/icons?i=postman" alt="Postman" />
 </a>
 
@@ -71,5 +72,6 @@ The database for the application is configured and hosted on **Railway**, so the
 
 You can find the API´s documentation here:: 
 <a href="https://documenter.getpostman.com/view/35395657/2sAYXBFedB" target="_blank">
+<br>
   <img src="https://skillicons.dev/icons?i=postman" alt="Postman" />
 </a>
